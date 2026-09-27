@@ -4,18 +4,21 @@
 #include <cctype>
 #include <string>
 #include "Player.h"
+
+std::string state_to_string(State state);
+
 class Game {
     Player _user;
     Player _computer;
 
     void user_init(std::string str);
-    void computer_init(std::string str);
+    void computer_init();
 
     State user_move(std::string input);
-    void computer_move();
+    State computer_move();
 
     bool is_end();
-    std::string show_game_window();
+    void show_game_window();
 public:
     Game();
     void start();
