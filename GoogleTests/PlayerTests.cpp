@@ -7,6 +7,7 @@
 TEST(PlayerTest, InitialState) {
     Player player;
     EXPECT_FALSE(player.check_ready());
+    EXPECT_TRUE(player.check_lose());
 }
 
 TEST(PlayerTest, SetShipValidAndLimits) {

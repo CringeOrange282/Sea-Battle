@@ -4,16 +4,16 @@ bool is_collision(int size, Position position, Direction direction) {
         if (size < 1 || size > 4) {
             return true;
         }
-    if (position.row() < 1 || position.row() > 10 || position.col() < 1 || position.col() > 10) {
+    if (position.get_row() < 1 || position.get_row() > 10 || position.get_col() < 1 || position.get_col() > 10) {
         return true;
     }
     if (direction == Horizontal) {
-        if (position.col() + size - 1 > 10) {
+        if (position.get_col() + size - 1 > 10) {
             return true;
         }
     }
     else if (direction == Vertical) {
-        if (position.row() + size - 1 > 10) {
+        if (position.get_row() + size - 1 > 10) {
             return true;
         }
     }
@@ -87,8 +87,8 @@ Ship::Ship(std::string str) {
 }
 
 int Ship::size() const noexcept { return _size; }
-int Ship::row() const noexcept { return _position.row(); }
-int Ship::col() const noexcept { return _position.col(); }
+int Ship::row() const noexcept { return _position.get_row(); }
+int Ship::col() const noexcept { return _position.get_col(); }
 Position Ship::position() const noexcept { return _position; }
 Direction Ship::direction() const noexcept { return _direction; }
 
@@ -100,7 +100,7 @@ void Ship::size(int size) {
 }
 
 void Ship::row(int row) {
-    Position pos(row, _position.col());
+    Position pos(row, _position.get_col());
     if (is_collision(_size, pos, _direction)) {
         throw std::logic_error("Invalid input: incorrect ship");
     }
@@ -108,7 +108,7 @@ void Ship::row(int row) {
 }
 
 void Ship::col(int col) {
-    Position pos(_position.row(), col);
+    Position pos(_position.get_row(), col);
     if (is_collision(_size, pos, _direction)) {
         throw std::logic_error("Invalid input: incorrect ship");
     }
@@ -116,7 +116,7 @@ void Ship::col(int col) {
 }
 
 void Ship::col(char col) {
-    Position pos(_position.row(), col);
+    Position pos(_position.get_row(), col);
     if (is_collision(_size, pos, _direction)) {
         throw std::logic_error("Invalid input: incorrect ship");
     }

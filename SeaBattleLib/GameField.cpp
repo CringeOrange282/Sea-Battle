@@ -1,8 +1,8 @@
 #include "GameField.h"
 
 bool is_collision(const GameField& gf, const Ship& ship) {
-    int min_row = ship.position().row() - 1;
-    int min_col = ship.position().col() - 1;
+    int min_row = ship.position().get_row() - 1;
+    int min_col = ship.position().get_col() - 1;
     int max_row = min_row;
     int max_col = min_col;
 
@@ -76,9 +76,7 @@ int GameField::check_destroy(int row, int col) {
 }
 
 GameField::GameField() : _n(10), _m(10) {
-    if (_n < 1 || _n > 25 || _m < 1 || _m > 25) {
-        throw std::logic_error("Invalid input: incorrect field parameters");
-    }
+
     _field = new char* [_n];
     for (int i = 0; i < _n; i++) {
         _field[i] = new char[_m];
@@ -128,8 +126,8 @@ State GameField::set(int n, char m) {
 }
 
 void GameField::set(const Ship& ship) {
-    int start_row = ship.position().row() - 1;
-    int start_col = ship.position().col() - 1;
+    int start_row = ship.position().get_row() - 1;
+    int start_col = ship.position().get_col() - 1;
 
     if (start_row < 0 || start_row >= _n || start_col < 0 || start_col >= _m) {
         throw std::logic_error("Invalid input: incorrect field");

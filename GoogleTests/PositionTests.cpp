@@ -5,17 +5,17 @@
 
 TEST(PositionTest, ValidCoordinates) {
     Position p1(5, 3);
-    EXPECT_EQ(p1.row(), 5);
-    EXPECT_EQ(p1.col(), 3);
-    EXPECT_EQ(p1.char_col(), 'C');
+    EXPECT_EQ(p1.get_row(), 5);
+    EXPECT_EQ(p1.get_col(), 3);
+    EXPECT_EQ(p1.get_char_col(), 'C');
 
     Position p2(7, 'F');
-    EXPECT_EQ(p2.row(), 7);
-    EXPECT_EQ(p2.col(), 6);
+    EXPECT_EQ(p2.get_row(), 7);
+    EXPECT_EQ(p2.get_col(), 6);
 
     Position p3("4 D");
-    EXPECT_EQ(p3.row(), 4);
-    EXPECT_EQ(p3.col(), 4);
+    EXPECT_EQ(p3.get_row(), 4);
+    EXPECT_EQ(p3.get_col(), 4);
 }
 
 TEST(PositionTest, InvalidCoordinates) {
@@ -35,18 +35,18 @@ TEST(PositionTest, InvalidStrings) {
 TEST(PositionTest, SettersAndGetters) {
     Position p(5, 5);
 
-    p.row(1);
-    EXPECT_EQ(p.row(), 1);
+    p.set_row(1);
+    EXPECT_EQ(p.get_row(), 1);
 
-    p.col(10);
-    EXPECT_EQ(p.col(), 10);
+    p.set_col(10);
+    EXPECT_EQ(p.get_col(), 10);
 
-    p.col('E');
-    EXPECT_EQ(p.col(), 5);
+    p.set_col('E');
+    EXPECT_EQ(p.get_col(), 5);
 
-    EXPECT_THROW(p.row(15), std::logic_error);
-    EXPECT_THROW(p.col(0), std::logic_error);
-    EXPECT_THROW(p.col('X'), std::logic_error);
+    EXPECT_THROW(p.set_row(15), std::logic_error);
+    EXPECT_THROW(p.set_col(0), std::logic_error);
+    EXPECT_THROW(p.set_col('X'), std::logic_error);
 }
 
 

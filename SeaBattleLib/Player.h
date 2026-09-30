@@ -14,7 +14,7 @@ public:
     void set_ship(const Ship& ship);
     State set_action(int row, char col);
 
-    void show_field(bool hide_ships = false);
+    void show_field(bool hide_ships = false) const;
     bool check_lose() const;
     bool check_ready() const;
 };

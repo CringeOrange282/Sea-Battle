@@ -1,22 +1,27 @@
 #include "Position.h"
+
+int to_integer(char ch) {
+    int numb_ch;
+    if (std::isupper(ch)) {
+        numb_ch = ch - 'A' + 1;
+    }
+    else {
+        numb_ch = ch - 'a' + 1;
+    }
+    return numb_ch;
+}
+
 bool is_collision(int row) {
         return (row < 1 || row > Position::_max_row);
 }
 
 bool is_collision(char col) {
-        int numb_col;
-    if (std::isupper(col)) {
-        numb_col = col - 'A' + 1;
-    }
-    else {
-        numb_col = col - 'a' + 1;
-    }
+    int numb_col = to_integer(col);
     return (numb_col < 1 || numb_col > Position::_max_col);
 }
 
 void parse(const std::string& str, Position& other) {
     int row; char col;
-    int numb_col;
     std::stringstream stream(str);
     if (!(stream >> row >> col)) {
         throw std::logic_error("Invalid input: incorrect position");
@@ -24,12 +29,7 @@ void parse(const std::string& str, Position& other) {
     if (is_collision(row) || is_collision(col)) {
         throw std::logic_error("Invalid input: incorrect position");
     }
-    if (std::isupper(col)) {
-        numb_col = col - 'A' + 1;
-    }
-    else {
-        numb_col = col - 'a' + 1;
-    }
+    int numb_col = to_integer(col);
 
     other._row = row;
     other._col = numb_col;
@@ -64,7 +64,7 @@ Position::Position(int row, char col) {
         _col = std::isupper(col) ? (col - 'A' + 1) : (col - 'a' + 1);
     }
 }
-void Position::row(int row) {
+void Position::set_row(int row) {
     if (is_collision(row)) {
         throw std::logic_error("Invalid input: incorrect position");
     }
@@ -72,7 +72,7 @@ void Position::row(int row) {
         _row = row;
     }
 }
-void Position::col(int col) {
+void Position::set_col(int col) {
     if (col < 1 || col > _max_col) {
         throw std::logic_error("Invalid input: incorrect position");
     }
@@ -80,18 +80,18 @@ void Position::col(int col) {
         _col = col;
     }
 }
-void Position::col(char col) {
+void Position::set_col(char col) {
     if (is_collision(col)) {
         throw std::logic_error("Invalid input: incorrect position");
     }
     else {
-        _col = std::isupper(col) ? (col - 'A' + 1) : (col - 'a' + 1);
+        _col = to_integer(col);
     }
 }
-int Position::row() const noexcept { return _row; }
-int Position::col() const noexcept { return _col; }
+int Position::get_row() const noexcept { return _row; }
+int Position::get_col() const noexcept { return _col; }
 
-char Position::char_col() const noexcept {
+char Position::get_char_col() const noexcept {
     return 'A' + _col - 1;
 }
 

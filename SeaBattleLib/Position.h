@@ -17,14 +17,15 @@ public:
     Position(const Position& other);
     Position(std::string str);
     Position(int, char);
-    void row(int row);
-    void col(int col);
-    void col(char col);
-    int row() const noexcept;
-    int col() const noexcept;
-    char char_col() const noexcept;
+    void set_row(int row);
+    void set_col(int col);
+    void set_col(char col);
+    int get_row() const noexcept;
+    int get_col() const noexcept;
+    char get_char_col() const noexcept;
     friend void parse(const std::string&, Position&);
     friend bool is_collision(int);
     friend bool is_collision(char);
 };
 
+int to_integer(char ch);

@@ -24,7 +24,7 @@ State Player::set_action(int row, char col) {
     return result;
 }
 
-void Player::show_field(bool hide_ships) {
+void Player::show_field(bool hide_ships) const{
     std::cout << to_string(_gamefield, hide_ships);
     std::cout << "\nShips Left:\n" << "* - " << _ships_counts[0] << " ** - " << _ships_counts[1] << " *** - " << _ships_counts[2] << " **** - " << _ships_counts[3];
 }
